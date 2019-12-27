@@ -1,10 +1,5 @@
 #include <Servo.h>
-
-const char keyUp = 'U';
-const char keyDown = 'D';
-const char keyRight = 'R';
-const char keyLeft = 'L';
-const char keyNone = 'N';
+#include "keys.h"
 
 const byte rowAmount = 4;
 const byte colAmount = 4;

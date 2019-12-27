@@ -1,17 +1,13 @@
-const char keyUp = 'U';
-const char keyDown = 'D';
-const char keyRight = 'R';
-const char keyLeft = 'L';
-const char keyNone = 'N';
+#include "keys.h"
 
 const byte rowAmount = 4;
 const byte colAmount = 4;
 
-char keyMatrix[rowAmount][colAmount] = {
-  {keyNone, keyUp,    keyNone,  keyNone},
-  {keyLeft, keyNone,  keyRight, keyNone},
-  {keyNone, keyDown,  keyNone,  keyNone},
-  {keyNone, keyNone,  keyNone,  keyNone}
+char keys[rowAmount][colAmount] = {keyUp, keyLeft, keyRight, keyDown};
+
+//расположение кнопок
+int keyIndexes[4][2] = {
+  {0, 1}, {1, 0}, {1, 2}, {2, 1}
 };
 
 static bool keyDownMatrix[rowAmount][colAmount];
@@ -45,11 +41,13 @@ void loop()
 char getKey()
 {
   char result = keyNone;
-  for (int i = 0; i < rowAmount; i++)
-    for (int j = 0; j < colAmount; j++)
-      if (isKeyDown(i, j))
-        result = keyMatrix[i][j];
-
+  for (int k = 0; k < rowAmount; k++){
+    int i = keyIndexes[k][0];
+    int j = keyIndexes[k][1];
+    if (isKeyDown(i, j))
+       result = keys[i][j];
+  }
+  
   return result;
 }
 
